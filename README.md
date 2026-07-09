@@ -177,4 +177,4 @@ Bu API önceki "spagetti" sistemin yerini almak için sıfırdan yazılmıştır
 
 ## 📄 Lisans
 
-MIT License — Marka Mutfağı Ekibi
+MIT License — Meryem Güçlü
