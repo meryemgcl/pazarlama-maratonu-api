@@ -1,125 +1,180 @@
 # 🍴 Pazarlama Maratonu Kayıt API
 
-Temiz, döngüsüz, tek veritabanı kullanan FastAPI uygulaması.
+> **Marka Mutfağı** ekibinin Pazarlama Maratonu etkinliği için geliştirilmiş temiz, döngüsüz ve tek veritabanı kullanan kayıt sistemi.
 
-## Kurulum
+---
+
+## 🎯 Ne Yapar?
+
+Gönüllü adayların Pazarlama Maratonu'na kaydolmasını, e-posta doğrulamasını ve Slack kanalına otomatik eklenmesini yönetir.
+
+```
+Kullanıcı Formu Doldurur
+        ↓
+Validasyon (e-posta, telefon formatı)
+        ↓
+Çift Kayıt Kontrolü (idempotency)
+        ↓
+Notion'a Tek Kayıt (pending_email)
+        ↓
+Onay Maili Gönderilir (24h link)
+        ↓
+Kullanıcı Linke Tıklar
+        ↓
+Slack'e Davet + Hoş Geldin Maili
+        ↓ (opsiyonel)
+SMS Bildirimi
+```
+
+---
+
+## ⚡ Teknolojiler
+
+| Teknoloji | Kullanım |
+|-----------|----------|
+| **FastAPI** | Web framework |
+| **Pydantic v2** | Veri doğrulama |
+| **Notion API** | Tek veritabanı (ana kaynak) |
+| **SMTP / Gmail** | E-posta gönderimi |
+| **Slack API** | Kanal daveti |
+| **Twilio** | Opsiyonel SMS |
+| **PyJWT** | 24 saatlik onay token'ı |
+
+---
+
+## 🚀 Kurulum
+
+### 1. Bağımlılıkları Yükle
 
 ```bash
-# 1. Bağımlılıkları yükle
 pip install -r requirements.txt
+```
 
-# 2. Ortam değişkenlerini hazırla
+### 2. Ortam Değişkenlerini Ayarla
+
+```bash
 copy .env.example .env
-# .env dosyasını açıp gerçek değerleri girin
+```
 
-# 3. Sunucuyu başlat
+`.env` dosyasını aç ve API key'lerini gir:
+
+```env
+NOTION_API_KEY=secret_xxxxx
+NOTION_DATABASE_ID=xxxxx
+SMTP_USER=gmail@gmail.com
+SMTP_PASSWORD=xxxx xxxx xxxx xxxx
+SLACK_BOT_TOKEN=xoxb-xxxxx
+SLACK_CHANNEL_ID=Cxxxxxxxx
+SECRET_KEY=en-az-32-karakter-rastgele-bir-deger
+```
+
+> 💡 SECRET_KEY üretmek için: `python -c "import secrets; print(secrets.token_hex(32))"`
+
+### 3. Sunucuyu Başlat
+
+```bash
 uvicorn main:app --reload --port 8000
 ```
 
-## Notion Veritabanı Kurulumu
+### 4. Tarayıcıda Aç
 
-Notion'da aşağıdaki özelliklere sahip bir veritabanı oluşturun:
+| URL | Açıklama |
+|-----|----------|
+| http://localhost:8000/docs | 🔵 Swagger UI — canlı test |
+| http://localhost:8000/redoc | 📖 API Dokümantasyonu |
+| http://localhost:8000/health | ✅ Sistem sağlık kontrolü |
 
-| Özellik Adı  | Tür          |
-|--------------|--------------|
-| Ad Soyad     | Title        |
-| E-posta      | Email        |
-| Telefon      | Phone Number |
-| Durum        | Select       |
-| Kayıt Tarihi | Date         |
+---
 
-**Durum** seçenekleri:
-- `pending_email`
-- `email_verified`
-- `active`
-- `passive`
+## 📡 Endpoint'ler
 
-## Endpoint'ler
+### `POST /register` — Yeni Kayıt
 
-### `POST /register`
 ```json
 {
   "ad_soyad": "Ahmet Yılmaz",
   "eposta": "ahmet@example.com",
-  "telefon": "05321234567"   // opsiyonel
+  "telefon": "05321234567"
 }
 ```
 
-**Başarılı yanıt (200):**
-```json
-{
-  "mesaj": "Kaydınız alındı. Lütfen e-postanızı onaylayın.",
-  "eposta": "ahmet@example.com",
-  "durum": "pending_email"
-}
-```
-
-**Hata yanıtları:**
-- `422` — Geçersiz e-posta / telefon formatı
-- `409` — E-posta zaten kayıtlı
-- `500` — Sunucu hatası
+**Yanıtlar:**
+| Kod | Açıklama |
+|-----|----------|
+| `200` | Kayıt alındı, onay maili gönderildi |
+| `409` | Bu e-posta zaten kayıtlı |
+| `422` | Geçersiz e-posta veya telefon formatı |
+| `500` | Sunucu hatası |
 
 ---
 
-### `GET /verify-email?token=<TOKEN>`
+### `GET /verify-email?token=<TOKEN>` — E-posta Onayı
 
-Kullanıcı onay mailindeki linke tıkladığında bu endpoint çalışır.
-Başarılı olursa HTML onay sayfası gösterilir.
+Kullanıcı onay mailindeki linke tıkladığında çalışır.
 
-**Akış:**
-1. Token doğrula (24h TTL)
-2. Notion kaydı → `email_verified`
-3. Slack daveti gönder
-4. Hoş geldin maili gönder
-5. Notion kaydı → `active`
-6. SMS gönder (opsiyonel, asenkron)
+**Sırasıyla:**
+1. JWT token doğrular (24 saatlik TTL)
+2. Notion kaydını `email_verified` yapar
+3. Slack kanalına davet gönderir
+4. Hoş geldin maili atar
+5. Kaydı `active` yapar
+6. Opsiyonel SMS gönderir
 
 ---
 
-### `GET /health`
+### `GET /health` — Sağlık Kontrolü
+
 ```json
 {"durum": "çalışıyor", "versiyon": "1.0.0"}
 ```
 
-## Test (curl)
+---
 
-```bash
-# Kayıt ol
-curl -X POST http://localhost:8000/register \
-  -H "Content-Type: application/json" \
-  -d '{"ad_soyad":"Test Kullanıcı","eposta":"test@example.com"}'
-
-# Swagger UI
-# http://localhost:8000/docs
-
-# ReDoc
-# http://localhost:8000/redoc
-```
-
-## Proje Yapısı
+## 🗂️ Proje Yapısı
 
 ```
-├── main.py                  # FastAPI app, endpoint'ler
-├── config.py                # Ortam değişkenleri
-├── models.py                # Pydantic şemaları
+📁 pazarlama-maratonu-api/
+├── main.py                  # FastAPI app — tüm akışın kalbi
+├── config.py                # Ortam değişkenleri (pydantic-settings)
+├── models.py                # Pydantic şemaları + validasyon
 ├── requirements.txt
-├── .env.example             # API key şablonu
+├── .env.example             # API key kurulum şablonu
 ├── utils/
-│   ├── logger.py            # Merkezi loglama
-│   └── token.py             # JWT token yönetimi
+│   ├── logger.py            # Renkli, zaman damgalı merkezi log
+│   └── token.py             # JWT token (24h TTL, UUID jti)
 └── services/
-    ├── notion_service.py    # Tek DB operasyonları
-    ├── email_service.py     # Onay + hoş geldin maili
-    ├── slack_service.py     # Kanal daveti
-    └── sms_service.py       # Opsiyonel SMS
+    ├── notion_service.py    # TEK veritabanı operasyonları
+    ├── email_service.py     # Onay + hoş geldin maili (max 2 mail)
+    ├── slack_service.py     # Sadece email_verified sonrası çalışır
+    └── sms_service.py       # Opsiyonel, 5s timeout, retry yok
 ```
 
-## Teknik Borç Önlemleri
+---
 
-| Sorun | Çözüm |
-|-------|-------|
-| Sonsuz SMS döngüsü | Single attempt + 5s timeout |
-| Çift kayıt | E-posta ile idempotency kontrolü |
-| Onaysız Slack daveti | `/verify-email` kapı prensibi |
-| 3 DB tutarsızlığı | Yalnızca Notion (tek kaynak) |
-| Sessiz hatalar | Her adımda logger + try/catch |
+## 🧹 Çözülen Teknik Borçlar
+
+Bu API önceki "spagetti" sistemin yerini almak için sıfırdan yazılmıştır:
+
+| Eski Sorun | Yeni Çözüm |
+|------------|-----------|
+| 3 farklı DB'ye çift yazma | Yalnızca **Notion** (tek kaynak) |
+| Sonsuz SMS retry döngüsü | Tek deneme + 5s timeout |
+| Onaysız Slack daveti | E-posta doğrulaması zorunlu kapı |
+| Input validasyonu yok | Pydantic field validator |
+| Aynı anda 4 mail | Max 2 mail, sıralı ve koşullu |
+| Çift kayıt mümkün | E-posta ile idempotency kontrolü |
+| Hata yönetimi yok | Her adımda try/catch + loglama |
+
+---
+
+## 🔒 Güvenlik
+
+- `.env` dosyası `.gitignore`'a eklenmiştir — asla commit edilmez
+- Token'lar JWT + HS256 + 24 saatlik TTL ile imzalanır
+- Her token benzersiz UUID (`jti`) içerir — tekrar kullanım engellenir
+
+---
+
+## 📄 Lisans
+
+MIT License — Marka Mutfağı Ekibi
