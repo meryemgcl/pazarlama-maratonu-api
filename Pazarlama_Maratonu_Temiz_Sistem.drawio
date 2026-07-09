@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="1">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- BAŞLIK -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="main_title" value="🍝 SPAGETTİ SİSTEM vs ✅ TEMİZ SİSTEM — Pazarlama Maratonu Kayıt Otomasyonu" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=16;fontStyle=1;fontColor=#1a1a2e;" vertex="1" parent="1">
+      <mxGeometry x="100" y="20" width="1420" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- SOL PANEL: SPAGETTİ / KÖTÜ SİSTEM -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="left_header" value="🍝 MEVCUT DURUM — Spagetti Sistem (BOZUK)" style="text;html=1;strokeColor=#b85450;fillColor=#f8cecc;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=14;fontStyle=1;fontColor=#b85450;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="60" y="70" width="600" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- BAŞLANGIÇ SOL -->
+    <mxCell id="l_start" value="BAŞLA&#xa;Kullanıcı Formu Doldurur" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="240" y="130" width="200" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- SPAGETTİ: 3 AYRI DB -->
+    <mxCell id="l_db_chaos" value="🔴 AYNI ANDA 3 VERİTABANINA KAYIT&#xa;↪ Notion&#xa;↪ Google Sheets&#xa;↪ Eski CRM Sistemi&#xa;(Senkronizasyon yok, çakışma riski!)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;align=left;" vertex="1" parent="1">
+      <mxGeometry x="200" y="215" width="280" height="110" as="geometry" />
+    </mxCell>
+
+    <!-- SPAGETTİ: 3+1 İLETİŞİM -->
+    <mxCell id="l_msg_chaos" value="🔴 AYNI ANDA 4 İLETİŞİM GÖNDERİLİYOR&#xa;↪ SMS (hatalı numara = sistem kilitlenme!)&#xa;↪ E-posta #1 (onay maili)&#xa;↪ E-posta #2 (hoş geldin maili)&#xa;↪ E-posta #3 (bilgilendirme maili)&#xa;(Validasyon yok, döngü riski!)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;align=left;" vertex="1" parent="1">
+      <mxGeometry x="200" y="355" width="280" height="140" as="geometry" />
+    </mxCell>
+
+    <!-- SPAGETTİ: ONAY YOK AMA SLACK -->
+    <mxCell id="l_slack_chaos" value="🔴 E-POSTA ONAYSIZ SLACK'E DAVET&#xa;Onaylamayan kullanıcılar doğrudan&#xa;Maraton Slack kanalına ekleniyor.&#xa;(Kimlik doğrulama atlanıyor!)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;fontStyle=1;align=left;" vertex="1" parent="1">
+      <mxGeometry x="200" y="520" width="280" height="100" as="geometry" />
+    </mxCell>
+
+    <!-- SPAGETTİ: TELEFON HATASI -->
+    <mxCell id="l_tel_bug" value="💀 SİSTEM KİLİTLENME NOKTASI&#xa;Hatalı telefon numarası girildiğinde:&#xa;• Hata mesajı gösterilmiyor&#xa;• Sistem arka planda SMS&#xa;  denemeye devam ediyor&#xa;• Timeout / Crash!" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8d7da;strokeColor=#842029;fontSize=11;fontStyle=1;align=left;strokeWidth=3;" vertex="1" parent="1">
+      <mxGeometry x="200" y="645" width="280" height="130" as="geometry" />
+    </mxCell>
+
+    <!-- CRASH -->
+    <mxCell id="l_crash" value="💥 SİSTEM ÇÖKÜYOR&#xa;veya ZOMBI SÜREÇ" style="ellipse;whiteSpace=wrap;html=1;fillColor=#b85450;strokeColor=#6c0000;fontSize=12;fontStyle=1;fontColor=#ffffff;" vertex="1" parent="1">
+      <mxGeometry x="245" y="800" width="210" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- TEKNİK BORÇ LİSTESİ -->
+    <mxCell id="l_debt" value="⚠️ TEKNİK BORÇLAR (Technical Debt)&#xa;&#xa;1. Input validasyonu YOK&#xa;2. Sonsuz döngü riski (SMS retry)&#xa;3. Veri tutarsızlığı (3 DB senkronize değil)&#xa;4. Kimlik doğrulama atlanıyor&#xa;5. Race condition (aynı anda 4 işlem)&#xa;6. Hata yönetimi (Error Handling) YOK&#xa;7. Idempotency yok (çift kayıt riski)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;align=left;verticalAlign=top;" vertex="1" parent="1">
+      <mxGeometry x="60" y="890" width="600" height="160" as="geometry" />
+    </mxCell>
+
+    <!-- OKLAR SOL -->
+    <mxCell id="le1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="l_start" target="l_db_chaos" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="le2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="l_start" target="l_msg_chaos" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points"><mxPoint x="540" y="157"/><mxPoint x="540" y="425"/></Array>
+      </mxGeometry>
+    </mxCell>
+    <mxCell id="le3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="l_db_chaos" target="l_slack_chaos" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="le4" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="l_msg_chaos" target="l_tel_bug" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="le5" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="l_tel_bug" target="l_crash" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="le6" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="l_slack_chaos" target="l_crash" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- ORTA AYRAÇ -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="divider" value="" style="line;strokeColor=#666666;strokeWidth=3;" vertex="1" parent="1">
+      <mxGeometry x="700" y="70" width="10" height="980" as="geometry" />
+    </mxCell>
+    <mxCell id="vs_label" value="VS" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontSize=24;fontStyle=1;fontColor=#666666;" vertex="1" parent="1">
+      <mxGeometry x="690" y="500" width="50" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <!-- SAĞ PANEL: TEMİZ SİSTEM -->
+    <!-- ══════════════════════════════════════════════════════════ -->
+    <mxCell id="right_header" value="✅ TEMİZ SİSTEM — Vibe Coding Yaklaşımı" style="text;html=1;strokeColor=#82b366;fillColor=#d5e8d4;align=center;verticalAlign=middle;whiteSpace=wrap;fontSize=14;fontStyle=1;fontColor=#2d6a4f;rounded=1;" vertex="1" parent="1">
+      <mxGeometry x="760" y="70" width="580" height="40" as="geometry" />
+    </mxCell>
+
+    <!-- BAŞLANGIÇ SAĞ -->
+    <mxCell id="r_start" value="BAŞLA&#xa;Kullanıcı Formu Doldurur" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="900" y="130" width="200" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- ADIM 1: Validasyon -->
+    <mxCell id="r_valid" value="ADIM 1: Veri Doğrulama&#xa;• E-posta formatı geçerli mi?&#xa;• Telefon formatı geçerli mi?&#xa;• Zorunlu alanlar dolu mu?" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="860" y="215" width="270" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- VALIDASYON KARARI -->
+    <mxCell id="r_d_valid" value="Veriler Geçerli mi?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="910" y="335" width="170" height="70" as="geometry" />
+    </mxCell>
+
+    <!-- HAYIR -> HATA -->
+    <mxCell id="r_error" value="❌ Kullanıcıya Hata Göster&#xa;Form Durdurulur" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="760" y="340" width="120" height="55" as="geometry" />
+    </mxCell>
+
+    <!-- ADIM 2: TEK DB'ye Kayıt -->
+    <mxCell id="r_db" value="ADIM 2: TEK VERİTABANINA Kaydet&#xa;✅ Notion (Ana Kaynak)&#xa;• Kayıt ID üret (idempotent)&#xa;• Durum: &quot;E-posta Onayı Bekleniyor&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="860" y="435" width="270" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- ADIM 3: SADECE 1 ONAY MAİLİ -->
+    <mxCell id="r_mail" value="ADIM 3: SADECE 1 Onay Maili Gönder&#xa;✅ E-posta Onay Linki&#xa;• 24 saat geçerlilik&#xa;• Max 1 retry (24h sonra)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="860" y="555" width="270" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- KARAR: E-POSTA ONAYLANDI MI? -->
+    <mxCell id="r_d_email" value="E-posta&#xa;Onaylandı mı?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="910" y="675" width="170" height="75" as="geometry" />
+    </mxCell>
+
+    <!-- HAYIR -> 24H BEKLE -->
+    <mxCell id="r_wait" value="⏳ 24s Sonra&#xa;Hatırlatma (1 kez)&#xa;→ Timeout: Pasife al" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;" vertex="1" parent="1">
+      <mxGeometry x="760" y="682" width="125" height="65" as="geometry" />
+    </mxCell>
+
+    <!-- ADIM 4: SLACK'E DAVET -->
+    <mxCell id="r_slack" value="ADIM 4: Slack'e Davet Gönder&#xa;✅ SADECE e-posta onayından sonra&#xa;✅ Hoş geldin maili (tek mail)&#xa;✅ Notion kaydı güncellenir:&#xa;   Durum: &quot;Aktif Katılımcı&quot;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="860" y="780" width="270" height="110" as="geometry" />
+    </mxCell>
+
+    <!-- ADIM 5: OPSİYONEL SMS -->
+    <mxCell id="r_sms" value="ADIM 5 (Opsiyonel): SMS Gönder&#xa;✅ Yalnızca telefon valid ise&#xa;✅ Try/Catch ile sarıl&#xa;✅ Max 1 deneme, hata sessizce logla" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=11;align=left;" vertex="1" parent="1">
+      <mxGeometry x="860" y="920" width="270" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- BİTİŞ -->
+    <mxCell id="r_end" value="BİTİŞ ✅&#xa;Kullanıcı Aktif Katılımcı" style="ellipse;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;" vertex="1" parent="1">
+      <mxGeometry x="900" y="1040" width="200" height="60" as="geometry" />
+    </mxCell>
+
+    <!-- OKLAR SAĞ -->
+    <mxCell id="re1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="r_start" target="r_valid" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="re2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="r_valid" target="r_d_valid" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="re3" value="HAYIR" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;fontStyle=1;fontColor=#b85450;" edge="1" source="r_d_valid" target="r_error" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="re4" value="EVET" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;fontStyle=1;fontColor=#006600;" edge="1" source="r_d_valid" target="r_db" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="re5" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="r_db" target="r_mail" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="re6" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="r_mail" target="r_d_email" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="re7" value="HAYIR" style="edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;fontStyle=1;fontColor=#b85450;" edge="1" source="r_d_email" target="r_wait" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="re8" value="EVET" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=1;fontStyle=1;fontColor=#006600;" edge="1" source="r_d_email" target="r_slack" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="re9" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="r_slack" target="r_sms" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+    <mxCell id="re10" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="r_sms" target="r_end" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+
+    <!-- Error -> tekrar form -->
+    <mxCell id="re11" value="Kullanıcı Düzeltir" style="edgeStyle=orthogonalEdgeStyle;exitX=0.5;exitY=0;entryX=0;entryY=0.5;fontStyle=2;" edge="1" source="r_error" target="r_valid" parent="1">
+      <mxGeometry relative="1" as="geometry">
+        <Array as="points"><mxPoint x="720" y="250"/></Array>
+      </mxGeometry>
+    </mxCell>
+
+  </root>
+</mxGraphModel>
